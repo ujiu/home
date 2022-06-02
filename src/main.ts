@@ -1,24 +1,26 @@
 import './index.css'
-import apps from './apps'
 import { debounce } from 'lodash'
 
 const rootEl = document.querySelector('#app')!
-const itemEls = apps.map(
-  item => `
-  <li style="width: ${getCardWidth(item)}px;">
-    <a href="${item.path}" title="${item.desc}">
-      <h3>${item.title}</h3>
-      <p>${item.desc}</p>
-    </a>
-  </li>
-`,
-)
 
-rootEl.innerHTML = itemEls.join('\n')
+fetch('/apps.json')
+  .then(res => res.json())
+  .then((apps: IAppItem[]) => {
+    const itemEls = apps.map(item => {
+      return `
+        <li style="width: ${getCardWidth(item)}px;">
+          <a href="${item.path}" title="${item.desc}">
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+          </a>
+        </li>`
+    })
 
-setRightItemFlex()
+    rootEl.innerHTML = itemEls.join('\n')
+    setRightItemFlex()
 
-window.addEventListener('resize', debounce(setRightItemFlex, 1000))
+    window.addEventListener('resize', debounce(setRightItemFlex, 1000))
+  })
 
 /**
  * 将页面每行最右侧元素设置为：flex: 1;
