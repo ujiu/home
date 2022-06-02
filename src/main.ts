@@ -26,9 +26,10 @@ fetch('/apps.json')
  * 将页面每行最右侧元素设置为：flex: 1;
  */
 function setRightItemFlex() {
+  console.log('resize')
   document.querySelectorAll('li').forEach(li => {
     const { right, width } = li.getBoundingClientRect()
-    if (rootEl.clientWidth - right < width) {
+    if (rootEl.clientWidth - right < width * 2) {
       li.style.flexGrow = '1'
     } else {
       li.style.flexGrow = '0'
