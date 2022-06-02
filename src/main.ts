@@ -11,7 +11,7 @@ fetch(
     const itemEls = apps.map(item => {
       return `
         <li style="width: ${getCardWidth(item)}px;">
-          <a href="${item.path}" title="${item.desc}">
+          <a href="${item.path}" title="${item.desc}" target="_blank">
             <h3>${item.title}</h3>
             <p>${item.desc}</p>
           </a>
