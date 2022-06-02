@@ -3,7 +3,7 @@ import { debounce } from 'lodash'
 
 const rootEl = document.querySelector('#app')!
 
-fetch('/apps.json')
+fetch('https://gist.githubusercontent.com/Shanglin-Lei/99e8da3c4b2dbd3a611ccd2eac505a54/raw/apps.json')
   .then(res => res.json())
   .then((apps: IAppItem[]) => {
     const itemEls = apps.map(item => {
